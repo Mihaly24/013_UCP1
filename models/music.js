@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
         },
         TahunTerbit:{
-            type: DataTypes.YEAR,
+            type: DataTypes.INTEGER,
         },
         genre: {
             type: DataTypes.STRING,
