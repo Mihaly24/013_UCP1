@@ -19,3 +19,21 @@ db.sequelize.sync()
         console.log(err);
     });
 
+app.post('/music', async (req, res) => {
+    const data = req.body;
+    try {
+        const music = await db.Music.create(data);
+        res.send(music);
+    } catch(err) {
+        res.send(err);
+    }
+})
+
+app.get('/music', async (req, res) => {
+    try {
+        const music = await db.Music.findAll();
+        res.send(music);
+    } catch(err) {
+        res.send(err);
+    }
+})
