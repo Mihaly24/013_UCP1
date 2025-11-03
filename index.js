@@ -37,3 +37,34 @@ app.get('/music', async (req, res) => {
         res.send(err);
     }
 })
+
+app.put('/music/:id', async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+
+    try {
+        const music = await db.Music.findByPk(id);
+        if (!music) {
+            return res.status(404).send({ message: 'Musik tidak ditemukan' });
+        }
+        await music.update(data);
+        res.send({ message: 'Musik telah terupdate', music });
+    } catch(err) {
+        res.status(500).send(err);
+    }
+})
+
+app.delete('/music/:id', async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const music = await db.Music.findByPk(id);
+        if (!music) {
+            return res.status(404).send({ message: 'Musik tidak ditemukan' });
+        }
+        await music.destroy();
+        res.send({ message: 'Musik telah terhapus'});
+    } catch(err) {
+        res.status(500).send(err);
+    }
+})
